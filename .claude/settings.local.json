@@ -20,7 +20,8 @@
       "Bash(curl -sSL -A \"Mozilla/5.0\" -o /tmp/avclub.xml -w \"final_url=%{url_effective} http_code=%{http_code} size=%{size_download}\\\\n\" \"https://www.avclub.com/tag/horror/rss\")",
       "Bash(curl -sSL -A \"Mozilla/5.0\" -o /tmp/hdna.xml -w \"final_url=%{url_effective} http_code=%{http_code} size=%{size_download}\\\\n\" \"https://www.horrordna.com/?format=feed&type=rss\")",
       "Bash(curl -sSL -A 'Mozilla/5.0 \\(compatible; FeedFetcher\\)' -o /dev/null -w '%{http_code}' --max-time 10 https://www.horrordna.com__TRACKED_VAR__)",
-      "Bash(npx astro *)"
+      "Bash(npx astro *)",
+      "Bash(npm run *)"
     ]
   }
 }

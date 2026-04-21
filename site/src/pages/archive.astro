@@ -15,27 +15,34 @@ function preview(body: string | undefined): string {
     .find((l) => l.length > 0 && !l.startsWith('#') && !l.startsWith('---'));
   if (!firstLine) return '';
   const plain = firstLine.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/[*_`]/g, '');
-  return plain.length > 140 ? plain.slice(0, 137).trimEnd() + '…' : plain;
+  return plain.length > 160 ? plain.slice(0, 157).trimEnd() + '…' : plain;
 }
 
 function iso(date: Date): string {
   return date.toISOString().slice(0, 10);
 }
+function fileId(date: Date): string {
+  return iso(date).replace(/-/g, '.').slice(2);
+}
 ---
 <Layout title="Horror Digest — Archive">
-  <a href="/" class="back">← latest digest</a>
+  <a href="/" class="back">← Latest Transmission</a>
   <h1>Archive</h1>
-  <ul>
+  <ul class="dossier">
     {sorted.map((d) => (
-      <li style="margin-bottom: 1.75rem;">
-        <a href={`/${iso(d.data.date)}/`} style="font-family: var(--mono); border-bottom: none;">
-          {iso(d.data.date)}
-        </a>
-        <p class="meta">
-          {d.data.itemCount} of {d.data.articleCount} articles · {d.data.sourceCount} sources
-        </p>
-        <p>{preview(d.body)}</p>
+      <li>
+        <span class="stamp">Declassified</span>
+        <a href={`/${iso(d.data.date)}/`} class="file-id">File № {fileId(d.data.date)}</a>
+        <div class="file-card">
+          <span class="field"><span class="label">Date:</span><span class="value">{iso(d.data.date)}</span></span>
+          <span class="field"><span class="label">Transmissions:</span><span class="value">{d.data.itemCount} / {d.data.articleCount}</span></span>
+          <span class="field"><span class="label">Sources:</span><span class="value">{d.data.sourceCount}</span></span>
+        </div>
+        <p class="preview">{preview(d.body)}</p>
       </li>
     ))}
   </ul>
+  <footer class="dispatch-footer">
+    <span class="sigil"><span class="glyph">∎</span>End Archive<span class="glyph">∎</span></span>
+  </footer>
 </Layout>

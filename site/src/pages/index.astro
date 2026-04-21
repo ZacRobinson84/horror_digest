@@ -9,16 +9,20 @@ const sorted = digests.sort(
 const latest = sorted[0];
 const { Content } = await render(latest);
 const dateStr = latest.data.date.toISOString().slice(0, 10);
+const fileId = dateStr.replace(/-/g, '.').slice(2);
 ---
 <Layout title={`Horror Digest — ${dateStr}`}>
-  <h1>{dateStr}</h1>
-  <p class="meta">
-    {latest.data.itemCount} of {latest.data.articleCount} articles · {latest.data.sourceCount} sources
-  </p>
+  <div class="file-card">
+    <span class="field"><span class="label">File №:</span><span class="value accent">{fileId}</span></span>
+    <span class="field"><span class="label">Transmissions:</span><span class="value">{latest.data.itemCount} / {latest.data.articleCount}</span></span>
+    <span class="field"><span class="label">Sources:</span><span class="value">{latest.data.sourceCount}</span></span>
+    <span class="field"><span class="label">Classification:</span><span class="value">Active</span></span>
+  </div>
   <article>
     <Content />
   </article>
-  <p style="margin-top: 2.5rem;">
-    <a href="/archive/" style="font-family: var(--mono); font-size: 0.9rem;">archive →</a>
-  </p>
+  <footer class="dispatch-footer">
+    <span class="sigil"><span class="glyph">∎</span>End File<span class="glyph">∎</span></span>
+    <a href="/archive/" class="to-archive">Open Archive →</a>
+  </footer>
 </Layout>

@@ -13,14 +13,21 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const dateStr = entry.data.date.toISOString().slice(0, 10);
+const fileId = dateStr.replace(/-/g, '.').slice(2);
 ---
 <Layout title={`Horror Digest — ${dateStr}`}>
-  <a href="/archive/" class="back">← archive</a>
-  <h1>{dateStr}</h1>
-  <p class="meta">
-    {entry.data.itemCount} of {entry.data.articleCount} articles · {entry.data.sourceCount} sources
-  </p>
+  <a href="/archive/" class="back">← Return to Archive</a>
+  <div class="file-card">
+    <span class="field"><span class="label">File №:</span><span class="value accent">{fileId}</span></span>
+    <span class="field"><span class="label">Transmissions:</span><span class="value">{entry.data.itemCount} / {entry.data.articleCount}</span></span>
+    <span class="field"><span class="label">Sources:</span><span class="value">{entry.data.sourceCount}</span></span>
+    <span class="field"><span class="label">Status:</span><span class="value">Archived</span></span>
+  </div>
   <article>
     <Content />
   </article>
+  <footer class="dispatch-footer">
+    <span class="sigil"><span class="glyph">∎</span>End File<span class="glyph">∎</span></span>
+    <a href="/archive/" class="to-archive">Return to Archive →</a>
+  </footer>
 </Layout>
