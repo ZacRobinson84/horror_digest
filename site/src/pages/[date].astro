@@ -15,7 +15,7 @@ const { Content } = await render(entry);
 const dateStr = entry.data.date.toISOString().slice(0, 10);
 ---
 <Layout title={`Horror Digest — ${dateStr}`}>
-  <a href="/" class="back">← all digests</a>
+  <a href="/archive/" class="back">← archive</a>
   <h1>{dateStr}</h1>
   <p class="meta">
     {entry.data.itemCount} of {entry.data.articleCount} articles · {entry.data.sourceCount} sources

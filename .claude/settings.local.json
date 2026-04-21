@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:bloody-disgusting.com)",
+      "WebFetch(domain:www.dreadcentral.com)",
+      "WebFetch(domain:rue-morgue.com)",
+      "WebFetch(domain:www.fangoria.com)",
+      "WebFetch(domain:dailydead.com)",
+      "WebFetch(domain:www.horrordna.com)",
+      "WebFetch(domain:ihorror.com)",
+      "WebFetch(domain:www.avclub.com)",
+      "Bash(npm init *)",
+      "Bash(npm install *)",
+      "Bash(node *)",
+      "Read(//c/Users/zacro/AppData/Local/Temp/claude/C--Claude-Code-horror-digest/e668fa15-39cd-46dc-b3c3-a0bdab71ed4a/tasks/**)",
+      "Bash(node index.js)",
+      "Bash(echo \"exit=$?\")",
+      "Read(//tmp/**)",
+      "Bash(curl -sS -A \"Mozilla/5.0\" -o /tmp/avclub.xml -w \"http_code=%{http_code} size=%{size_download}\\\\n\" \"https://www.avclub.com/tag/horror/rss\")",
+      "Bash(curl -sSL -A \"Mozilla/5.0\" -o /tmp/avclub.xml -w \"final_url=%{url_effective} http_code=%{http_code} size=%{size_download}\\\\n\" \"https://www.avclub.com/tag/horror/rss\")",
+      "Bash(curl -sSL -A \"Mozilla/5.0\" -o /tmp/hdna.xml -w \"final_url=%{url_effective} http_code=%{http_code} size=%{size_download}\\\\n\" \"https://www.horrordna.com/?format=feed&type=rss\")",
+      "Bash(curl -sSL -A 'Mozilla/5.0 \\(compatible; FeedFetcher\\)' -o /dev/null -w '%{http_code}' --max-time 10 https://www.horrordna.com__TRACKED_VAR__)",
+      "Bash(npx astro *)"
+    ]
+  }
+}

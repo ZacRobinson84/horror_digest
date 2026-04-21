@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const digests = await getCollection('digests');
+const sorted = digests.sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+
+function preview(body: string | undefined): string {
+  if (!body) return '';
+  const firstLine = body
+    .split('\n')
+    .map((l) => l.trim())
+    .find((l) => l.length > 0 && !l.startsWith('#') && !l.startsWith('---'));
+  if (!firstLine) return '';
+  const plain = firstLine.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/[*_`]/g, '');
+  return plain.length > 140 ? plain.slice(0, 137).trimEnd() + '…' : plain;
+}
+
+function iso(date: Date): string {
+  return date.toISOString().slice(0, 10);
+}
+---
+<Layout title="Horror Digest — Archive">
+  <a href="/" class="back">← latest digest</a>
+  <h1>Archive</h1>
+  <ul>
+    {sorted.map((d) => (
+      <li style="margin-bottom: 1.75rem;">
+        <a href={`/${iso(d.data.date)}/`} style="font-family: var(--mono); border-bottom: none;">
+          {iso(d.data.date)}
+        </a>
+        <p class="meta">
+          {d.data.itemCount} of {d.data.articleCount} articles · {d.data.sourceCount} sources
+        </p>
+        <p>{preview(d.body)}</p>
+      </li>
+    ))}
+  </ul>
+</Layout>
