@@ -1,0 +1,26 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const digests = await getCollection('digests');
+  return digests.map((entry) => ({
+    params: { date: entry.data.date.toISOString().slice(0, 10) },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const dateStr = entry.data.date.toISOString().slice(0, 10);
+---
+<Layout title={`Horror Digest — ${dateStr}`}>
+  <a href="/" class="back">← all digests</a>
+  <h1>{dateStr}</h1>
+  <p class="meta">
+    {entry.data.itemCount} of {entry.data.articleCount} articles · {entry.data.sourceCount} sources
+  </p>
+  <article>
+    <Content />
+  </article>
+</Layout>

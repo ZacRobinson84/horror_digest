@@ -1,0 +1,16 @@
+{
+  "name": "horror-digest-site",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/vercel": "^10.0.4",
+    "astro": "^6.1.8"
+  }
+}
